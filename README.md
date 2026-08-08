@@ -6,12 +6,14 @@ Plain static HTML/CSS — no build step. Hosted on GitHub Pages.
 
 ## Pages
 
-- `index.html` — Home
-- `team.html` — The Team (Calapya)
-- `events.html` — Events & 2026 race calendar
-- `faq.html` — FAQ
-- `board.html` — Board of directors
-- `support.html` — Sponsors & support
+Clean URLs via directory-style pages (each page is `<name>/index.html`):
+
+- `/` — Home (`index.html`)
+- `/team/` — The Team (Calapya)
+- `/events/` — Events & 2026 race calendar
+- `/faq/` — FAQ
+- `/board/` — Board of directors
+- `/support/` — Sponsors & support
 
 Shared styles live in `css/site.css` (design tokens from the 2026 redesign handoff). Brand SVGs are in `assets/`.
 
