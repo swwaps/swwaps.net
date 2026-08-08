@@ -41,8 +41,8 @@ h1, h2, h3, p { text-wrap: pretty; }
 /* ---------- Nav ---------- */
 
 .nav {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 14px 32px;
-  padding: 18px var(--gutter); max-width: 1280px; margin: 0 auto; box-sizing: border-box;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 12px clamp(16px, 3vw, 32px);
+  padding: clamp(14px, 3vw, 18px) var(--gutter); max-width: 1280px; margin: 0 auto; box-sizing: border-box;
 }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
 .brand img { width: 38px; height: 38px; display: block; }
@@ -115,7 +115,7 @@ h1, h2, h3, p { text-wrap: pretty; }
 .band-inner { max-width: 1184px; margin: 0 auto; }
 .grid-2 {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-  gap: 56px; align-items: center;
+  gap: clamp(32px, 5vw, 56px); align-items: center;
 }
 .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 20px; }
 
@@ -151,7 +151,7 @@ h1, h2, h3, p { text-wrap: pretty; }
 
 /* ---------- Dark band ---------- */
 
-.band-fir { background: var(--fir); padding: 80px var(--gutter); }
+.band-fir { background: var(--fir); padding: clamp(48px, 8.5vw, 80px) var(--gutter); }
 .band-fir p { color: var(--on-fir-2); }
 
 /* em-dash bullet lists */
@@ -165,7 +165,7 @@ h1, h2, h3, p { text-wrap: pretty; }
 
 /* ---------- Footer ---------- */
 
-.footer { background: var(--fir); padding: 56px var(--gutter) 40px; }
+.footer { background: var(--fir); padding: clamp(40px, 6vw, 56px) var(--gutter) clamp(28px, 5vw, 40px); }
 .footer-inner { max-width: 1184px; margin: 0 auto; display: flex; flex-direction: column; gap: 36px; }
 .footer-top { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
 .footer-brand { display: flex; flex-direction: column; gap: 12px; max-width: 320px; }
@@ -181,7 +181,7 @@ h1, h2, h3, p { text-wrap: pretty; }
 .footer-rule { border-top: 1px solid var(--border-fir); padding-top: 20px; font-size: 12.5px; color: var(--on-fir-faint); }
 
 /* compact footer */
-.footer-compact { background: var(--fir); padding: 48px var(--gutter) 40px; }
+.footer-compact { background: var(--fir); padding: clamp(36px, 5.5vw, 48px) var(--gutter) clamp(28px, 5vw, 40px); }
 .footer-compact.ruled { border-top: 1px solid var(--border-fir); }
 .footer-compact-inner {
   max-width: 1184px; margin: 0 auto; display: flex; justify-content: space-between;
@@ -204,7 +204,7 @@ h1, h2, h3, p { text-wrap: pretty; }
 }
 .cta-basalt p { font-size: 16px; line-height: 1.6; color: var(--on-basalt-2); margin: 0; max-width: 52ch; }
 
-.cta-fir-band { background: var(--fir); padding: 64px var(--gutter); }
+.cta-fir-band { background: var(--fir); padding: clamp(44px, 7vw, 64px) var(--gutter); }
 .cta-fir-inner {
   max-width: 1184px; margin: 0 auto; display: flex; align-items: center;
   justify-content: space-between; gap: 32px; flex-wrap: wrap;
@@ -222,3 +222,26 @@ h1, h2, h3, p { text-wrap: pretty; }
   letter-spacing: -0.015em; color: var(--fir); margin: 0;
 }
 .page-intro { font-size: 17px; line-height: 1.6; color: var(--ink-2); margin: 0; max-width: 58ch; }
+
+/* ---------- Phones ---------- */
+/* Text-only buttons carry side padding so they optically match pill buttons
+   beside them; once they wrap onto their own line that padding reads as a
+   stray indent, so drop it. */
+@media (max-width: 600px) {
+  .btn-text { padding-left: 0; padding-right: 0; }
+  .footer-cols { gap: 28px 40px; }
+  .footer-inner { gap: 28px; }
+
+  /* Bare text links are only as tall as their line box (~18px), far under the
+     44px touch minimum. Pad them out and drop the row gap the padding replaces. */
+  .nav-link { padding: 13px 0; }
+  .nav-links { gap: 0 clamp(14px, 4vw, 24px); }
+  .footer-col a, .footer-compact-links a { padding: 7px 0; }
+  .footer-col { gap: 0; }
+  .footer-compact-links { gap: 0 22px; }
+  .race-recap { padding: 6px 0; }
+
+  /* Purely decorative; on a phone it wraps onto its own line and costs a
+     third of a screen for nothing. */
+  .banner-glyph { display: none; }
+}
