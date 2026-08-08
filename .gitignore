@@ -1,2 +1,5 @@
 .claude/
 .DS_Store
+
+# Stand-in sponsor logos for local layout preview only — never commit
+assets/photos/sponsors-standin/
