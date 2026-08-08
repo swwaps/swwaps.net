@@ -119,6 +119,12 @@ h1, h2, h3, p { text-wrap: pretty; }
 }
 .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 20px; }
 
+/* Text-heavy pages (FAQ) need a narrow measure for readability, but the column
+   must not be centred — that would push the eyebrow and h1 inward and break the
+   left edge every other page shares. Keep .container's 1280px + gutter, and cap
+   the children instead so the reading column hangs off the same left edge. */
+.measure > * { max-width: 880px; }
+
 /* ---------- Photo placeholders (replace with <img> when photos arrive) ---------- */
 
 .photo-slot {
