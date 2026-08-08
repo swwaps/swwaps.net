@@ -102,6 +102,12 @@ h1, h2, h3, p { text-wrap: pretty; }
 .btn-sm { font-size: 15.5px; padding: 13px 26px; }
 .btn-text { text-decoration: none; color: var(--fir); font-weight: 700; font-size: 16px; padding: 15px 24px; }
 .btn-text:hover { color: var(--salmon); }
+.btn-pill-outline {
+  text-decoration: none; color: var(--fir); font-weight: 700; font-size: 15.5px;
+  padding: 12px 24px; border: 2px solid var(--fir); border-radius: 999px;
+  white-space: nowrap; transition: all 150ms;
+}
+.btn-pill-outline:hover { background: var(--fir); color: var(--fog); }
 
 /* ---------- Layout helpers ---------- */
 
