@@ -223,19 +223,42 @@ h1, h2, h3, p { text-wrap: pretty; }
 }
 .page-intro { font-size: 17px; line-height: 1.6; color: var(--ink-2); margin: 0; max-width: 58ch; }
 
-/* ---------- Phones ---------- */
-/* Text-only buttons carry side padding so they optically match pill buttons
-   beside them; once they wrap onto their own line that padding reads as a
-   stray indent, so drop it. */
-@media (max-width: 600px) {
+/* The CTA pair is wrapped in .nav-cta so it can become a fixed bar on phones.
+   `display: contents` makes the wrapper invisible to the nav's flex layout, so
+   on desktop the two buttons lay out exactly as if it weren't there. */
+.nav-cta { display: contents; }
+
+/* ---------- Phones and narrow windows ---------- */
+@media (max-width: 700px) {
+  /* Donate and Join us leave the nav entirely and become a thumb-reachable
+     bar pinned to the bottom. This stops them wrapping apart from each other,
+     keeps the primary CTA on screen the whole way down the page, and takes
+     two rows off the nav. */
+  .nav-cta {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    padding: 10px var(--gutter);
+    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    background: rgba(238, 241, 234, .94);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border);
+  }
+  .nav-cta .nav-donate, .nav-cta .nav-join {
+    text-align: center; padding: 12px 16px; white-space: nowrap; box-sizing: border-box;
+  }
+  /* Reserve room so the bar never covers the end of the footer. */
+  body { padding-bottom: 82px; }
+
+  /* With the buttons gone the nav is brand + links; tighten what's left and
+     drop the desktop margin-left:auto so the links align under the wordmark
+     instead of hanging off the right edge. */
+  .nav { padding-bottom: 4px; gap: 8px clamp(16px, 4vw, 32px); }
+  .nav-link { padding: 13px 0; }
+  .nav-links { gap: 0 clamp(14px, 4vw, 24px); margin-left: 0; }
+
   .btn-text { padding-left: 0; padding-right: 0; }
   .footer-cols { gap: 28px 40px; }
   .footer-inner { gap: 28px; }
-
-  /* Bare text links are only as tall as their line box (~18px), far under the
-     44px touch minimum. Pad them out and drop the row gap the padding replaces. */
-  .nav-link { padding: 13px 0; }
-  .nav-links { gap: 0 clamp(14px, 4vw, 24px); }
   .footer-col a, .footer-compact-links a { padding: 7px 0; }
   .footer-col { gap: 0; }
   .footer-compact-links { gap: 0 22px; }
@@ -244,4 +267,10 @@ h1, h2, h3, p { text-wrap: pretty; }
   /* Purely decorative; on a phone it wraps onto its own line and costs a
      third of a screen for nothing. */
   .banner-glyph { display: none; }
+
+  /* Page-header eyebrows ("The team", "Events", "FAQ") restate the active nav
+     item directly below it, and wrap to two lines on a phone. The h1 under
+     each one carries the meaning. In-page section labels use .eyebrow-plain
+     and are untouched. */
+  .eyebrow { display: none; }
 }
